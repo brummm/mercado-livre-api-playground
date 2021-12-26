@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+
+
+.list {
+	padding-top: 45px;
+}
+
+.category {
+	.opened {
+		background: red;
+	}
+	button {
+		border-bottom: 1px solid $palleteBg;
+		color: $pallete5;
+		display: flex;
+		font-size: 18px;
+		font-weight: bold;
+		padding: 15px 0;
+		width: 100%;
+	}
+}

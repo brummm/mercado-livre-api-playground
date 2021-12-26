@@ -13,23 +13,32 @@ export interface ICategory {
 	attributable?: boolean;
 	date_created?: string;
 }
-export const listCategories = async (): Promise<ICategory> => {
-	const URL = "https://api.mercadolibre.com/sites/MLB/categories";
-	const EXPECTED_STATUS = 200;
 
+const apiError = (expectedStatus: number, status: number) => {
+	throw new Error(
+		`A API retornou com o status diferente de ${expectedStatus} (${status}).`
+	);
+};
+
+const apiGet = async (url, expectedStatus = 200): Promise<any> => {
 	try {
-		const response = await fetch(URL);
+		const response = await fetch(url);
 		const { status } = response;
-		if (status === EXPECTED_STATUS) {
+		if (status === expectedStatus) {
 			const data = await response.json();
 			return data;
 		}
-		throw new Error(
-			`A API retornou com o status diferente de ${EXPECTED_STATUS} (${status}).`
-		);
+		apiError(expectedStatus, status);
 	} catch (e) {
 		console.error(e);
 	}
 	return null;
-	// TODO: add a error message displayer
+};
+
+export const listCategories = async (): Promise<ICategory[]> => {
+	return await apiGet("https://api.mercadolibre.com/sites/MLB/categories");
+};
+
+export const getCategory = async (id: string): Promise<ICategory> => {
+	return await apiGet("https://api.mercadolibre.com/categories/" + id);
 };
