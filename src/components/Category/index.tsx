@@ -1,32 +1,65 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { ICategory } from "../../lib/api";
+import { BiChevronLeft } from "react-icons/bi";
 import styles from "./Category.module.scss";
 
 type CategoryListProps = {
 	data: ICategory[];
 };
-export const CategoryList: React.FC<CategoryListProps> = ({ data }) => {
+type OpenableCategory = {
+	opened: boolean;
+	category: ICategory;
+};
+export const CategoryList: React.FC<CategoryListProps> = memo(({ data }) => {
+	const [openableCategories, setOpenableCategories] = useState(
+		data.map((category) => {
+			return { category: category, opened: false };
+		})
+	);
+
+	const closeOthers = useCallback((current) => {
+		const openables = openableCategories.map((openableCategory) => {
+			if (openableCategory.category.id !== current.id) {
+				openableCategory.opened = false;
+			}
+			return openableCategory;
+		});
+		console.log(openables);
+
+		setOpenableCategories(openables);
+	}, [data]);
+
 	return (
 		<ul className={styles.list}>
-			{data.map((category) => (
-				<li key={category.id}>
-					<Category category={category}></Category>
+			{openableCategories.map((category) => (
+				<li key={category.category.id}>
+					<Category openableCategory={category} onOpen={closeOthers}></Category>
 				</li>
 			))}
 		</ul>
 	);
-};
+});
 
 type CategoryProps = {
-	category: ICategory;
+	openableCategory: OpenableCategory;
+	onOpen: Function;
 };
 
-const originalClassNames = [styles.category]
-export const Category: React.FC<CategoryProps> = ({ category }) => {
-	const [opened, setOpened] = useState(false);
+const originalClassNames = [styles.category];
+export const Category: React.FC<CategoryProps> = ({
+	openableCategory,
+	onOpen = () => {},
+}) => {
 	const [classNames, setClassNames] = useState(originalClassNames);
-	const { name, id, children_categories } = category;
+	const [opened, setOpened] = useState(openableCategory.opened);
+	const { name, id, children_categories } = openableCategory.category;
+
+	useEffect(() => {
+		if (openableCategory.opened !== opened) {
+			setOpened(openableCategory.opened);
+		}
+	});
 
 	useEffect(() => {
 		const _classNames = [...originalClassNames];
@@ -40,10 +73,14 @@ export const Category: React.FC<CategoryProps> = ({ category }) => {
 			<button
 				onClick={(e) => {
 					e.preventDefault();
-					setOpened(!opened);
+					openableCategory.opened = !openableCategory.opened;
+					setOpened(openableCategory.opened);
+					if (openableCategory.opened === true)
+						onOpen(openableCategory.category);
 				}}
 			>
-				{name}
+				<span>{name}</span>
+				<BiChevronLeft className={styles.icon} />
 			</button>
 			{opened && (
 				<ul>
