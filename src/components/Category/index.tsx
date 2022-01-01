@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React, { memo, useCallback, useEffect, useState } from "react";
+import {
+	BiChevronLeft,
+	BiChevronLeftCircle,
+	BiChevronRightCircle,
+} from "react-icons/bi";
 import { ICategory } from "../../lib/api";
-import { BiChevronLeft } from "react-icons/bi";
 import styles from "./Category.module.scss";
 
 type CategoryListProps = {
@@ -18,17 +22,19 @@ export const CategoryList: React.FC<CategoryListProps> = memo(({ data }) => {
 		})
 	);
 
-	const closeOthers = useCallback((current) => {
-		const openables = openableCategories.map((openableCategory) => {
-			if (openableCategory.category.id !== current.id) {
-				openableCategory.opened = false;
-			}
-			return openableCategory;
-		});
-		console.log(openables);
+	const closeOthers = useCallback(
+		(current) => {
+			const openables = openableCategories.map((openableCategory) => {
+				if (openableCategory.category.id !== current.id) {
+					openableCategory.opened = false;
+				}
+				return openableCategory;
+			});
 
-		setOpenableCategories(openables);
-	}, [data]);
+			setOpenableCategories(openables);
+		},
+		[data]
+	);
 
 	return (
 		<ul className={styles.list}>
@@ -47,6 +53,7 @@ type CategoryProps = {
 };
 
 const originalClassNames = [styles.category];
+const ITEMS_PER_PAGE = 6;
 export const Category: React.FC<CategoryProps> = ({
 	openableCategory,
 	onOpen = () => {},
@@ -54,6 +61,8 @@ export const Category: React.FC<CategoryProps> = ({
 	const [classNames, setClassNames] = useState(originalClassNames);
 	const [opened, setOpened] = useState(openableCategory.opened);
 	const { name, id, children_categories } = openableCategory.category;
+	const [first, setFirst] = useState(0);
+	const [showingCategories, setShowingCategories] = useState([]);
 
 	useEffect(() => {
 		if (openableCategory.opened !== opened) {
@@ -68,9 +77,54 @@ export const Category: React.FC<CategoryProps> = ({
 		}
 		setClassNames(_classNames);
 	}, [opened]);
+
+	useEffect(() => {
+		const toShow = [];
+		for (
+			let i = first, j = 0;
+			i < children_categories.length && j < ITEMS_PER_PAGE;
+			i++, j++
+		) {
+			toShow.push(children_categories[i]);
+		}
+		setShowingCategories(toShow);
+	}, [first]);
+
+	const hasPrevious = useCallback(() => {
+		const newFirst = first - ITEMS_PER_PAGE;
+		if (newFirst >= 0) {
+			return newFirst;
+		}
+		return null;
+	}, [first]);
+
+	const previous = useCallback(() => {
+		const newFirst = hasPrevious();
+		if (newFirst !== null) {
+			setFirst(newFirst);
+		}
+	}, [first]);
+
+	const hasNext = useCallback(() => {
+		const newFirst = first + ITEMS_PER_PAGE;
+		console.log(newFirst, children_categories.length, newFirst < children_categories.length);
+
+		if (newFirst < children_categories.length) {
+			return newFirst;
+		}
+		return null;
+	}, [first]);
+	const next = useCallback(() => {
+		const newFirst = hasNext();
+		if (newFirst !== null) {
+			setFirst(newFirst);
+		}
+	}, [first]);
+
 	return (
 		<section className={classNames.join(" ")}>
 			<button
+				className={styles.categoryButton}
 				onClick={(e) => {
 					e.preventDefault();
 					openableCategory.opened = !openableCategory.opened;
@@ -83,13 +137,37 @@ export const Category: React.FC<CategoryProps> = ({
 				<BiChevronLeft className={styles.icon} />
 			</button>
 			{opened && (
-				<ul>
-					{children_categories.map(({ name, id }) => (
-						<li key={id}>
-							<Link href="/produtos">{name}</Link>
-						</li>
-					))}
-				</ul>
+				<div>
+					<ul>
+						{showingCategories.map(({ name, id }) => (
+							<li key={id}>
+								<Link href="/produtos">{name}</Link>
+							</li>
+						))}
+					</ul>
+					<nav>
+						<button
+							className={styles.navButton}
+							disabled={hasPrevious() === null}
+							onClick={(e) => {
+								e.preventDefault();
+								previous();
+							}}
+						>
+							<BiChevronLeftCircle />
+						</button>
+						<button
+							className={styles.navButton}
+							disabled={hasNext() === null}
+							onClick={(e) => {
+								e.preventDefault();
+								next();
+							}}
+						>
+							<BiChevronRightCircle />
+						</button>
+					</nav>
+				</div>
 			)}
 		</section>
 	);

@@ -1,7 +1,5 @@
 @import '../../styles/variables.scss';
 
-
-
 .list {
 	padding-top: 45px;
 }
@@ -10,7 +8,7 @@
 
 	$transition: .15s ease-in-out;
 
-	button {
+	button.categoryButton {
 		align-items: center;
 		border-bottom: 1px solid $palleteBg;
 		color: $pallete5;
@@ -26,21 +24,40 @@
 			transition: all $transition;
 		}
 	}
-	ul {
+	div {
 		background-color: $palleteBg;
-		margin-left: -$contentPadding;
+		box-shadow: inset 0px 0px 30px 5px $pallete3;
+		margin-left: -($contentPadding*2);
+		margin-right: -($contentPadding*2);
 		max-height: 0;
 		opacity: 0;
 		overflow: hidden;
-		padding: 0 30px;
+		padding: $contentPadding $contentPadding*2;
 		position: relative;
-		margin-right: -$contentPadding;
 		transition: all $transition;
-		li {
-			a {
+		ul {
+			li {
+				a {
+					color: $pallete1;
+					display: block;
+					padding: 15px;
+				}
+			}
+		}
+		nav {
+			align-items: flex-start;
+			display: flex;
+			height: 50px;
+			justify-content: space-between;
+			margin-top: 20px;
+			width: 120px;
+			button.navButton {
 				color: $pallete1;
-				display: block;
-				padding: 15px;
+				font-size: 40px;
+				margin-left: 5px;
+				&:disabled {
+					opacity: .3;
+				}
 			}
 		}
 	}
@@ -52,7 +69,7 @@
 				transform: rotate(-90deg);
 			}
 		}
-		ul {
+		div {
 			max-height: 100vh;
 			opacity: 1;
 		}
