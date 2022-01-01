@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import {
 	BiChevronLeft,
 	BiChevronLeftCircle,
@@ -54,6 +54,7 @@ type CategoryProps = {
 
 const originalClassNames = [styles.category];
 const ITEMS_PER_PAGE = 6;
+const TRANSITION_MILIS = 150;
 export const Category: React.FC<CategoryProps> = ({
 	openableCategory,
 	onOpen = () => {},
@@ -63,6 +64,7 @@ export const Category: React.FC<CategoryProps> = ({
 	const { name, id, children_categories } = openableCategory.category;
 	const [first, setFirst] = useState(0);
 	const [showingCategories, setShowingCategories] = useState([]);
+	const categoryListRef = useRef(null);
 
 	useEffect(() => {
 		if (openableCategory.opened !== opened) {
@@ -101,13 +103,16 @@ export const Category: React.FC<CategoryProps> = ({
 	const previous = useCallback(() => {
 		const newFirst = hasPrevious();
 		if (newFirst !== null) {
-			setFirst(newFirst);
+			categoryListRef.current.className = styles.leaveRight;
+			setTimeout(() => {
+				categoryListRef.current.className = styles.enterLeft;
+				setFirst(newFirst);
+			}, TRANSITION_MILIS);
 		}
 	}, [first]);
 
 	const hasNext = useCallback(() => {
 		const newFirst = first + ITEMS_PER_PAGE;
-		console.log(newFirst, children_categories.length, newFirst < children_categories.length);
 
 		if (newFirst < children_categories.length) {
 			return newFirst;
@@ -117,7 +122,11 @@ export const Category: React.FC<CategoryProps> = ({
 	const next = useCallback(() => {
 		const newFirst = hasNext();
 		if (newFirst !== null) {
-			setFirst(newFirst);
+			categoryListRef.current.className = styles.leaveLeft;
+			setTimeout(() => {
+				categoryListRef.current.className = styles.enterRight;
+				setFirst(newFirst);
+			}, TRANSITION_MILIS);
 		}
 	}, [first]);
 
@@ -138,7 +147,7 @@ export const Category: React.FC<CategoryProps> = ({
 			</button>
 			{opened && (
 				<div>
-					<ul>
+					<ul ref={categoryListRef}>
 						{showingCategories.map(({ name, id }) => (
 							<li key={id}>
 								<Link href="/produtos">{name}</Link>
