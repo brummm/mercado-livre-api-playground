@@ -21,7 +21,6 @@ export const Product: React.FC<{ product: IProduct }> = ({ product }) => {
 	}
 	console.log(product);
 
-
 	return <Page title={product.title} titleType="small"></Page>;
 };
 
