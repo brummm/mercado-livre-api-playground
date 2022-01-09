@@ -1,13 +1,14 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import Footer from "../Footer";
-import Header, { HeaderProps } from "../Header";
+import Header, { HeaderBackButton, HeaderProps } from "../Header";
 import styles from "./Page.module.scss";
 
 interface PageProps {
 	title: string;
-	titleType?: HeaderProps['titleType']
+	titleType?: HeaderProps['titleType'];
+	back?: HeaderBackButton
 }
-export const Page: React.FC<PageProps> = ({ children, title, titleType }) => {
+export const Page: React.FC<PageProps> = ({ children, title, titleType, back }) => {
 	const [shrink, setShrink] = useState(false);
 
 	useEffect(() => {
@@ -25,7 +26,7 @@ export const Page: React.FC<PageProps> = ({ children, title, titleType }) => {
 	}, []);
 	return (
 		<>
-			<Header shrink={shrink} title={title} titleType={titleType}></Header>
+			<Header shrink={shrink} title={title} titleType={titleType} back={back}></Header>
 			<main className={styles.main}>{children}</main>
 			<Footer />
 		</>

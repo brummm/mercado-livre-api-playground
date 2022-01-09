@@ -5,7 +5,7 @@ import {
 	BiChevronLeftCircle,
 	BiChevronRightCircle,
 } from "react-icons/bi";
-import { ICategory } from "../../lib/api";
+import { ICategory } from "../../lib/interfaces/ICategory";
 import styles from "./Category.module.scss";
 
 type CategoryListProps = {

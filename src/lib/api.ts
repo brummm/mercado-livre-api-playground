@@ -1,18 +1,6 @@
-export interface ICategory {
-	id: string;
-	name: string;
-	picture?: string;
-	permalink?: string;
-	total_items_in_this_category?: number;
-	path_from_root?: ICategory[];
-	children_categories?: ICategory[];
-	attribute_types?: string;
-	settings?: any;
-	channels_settings?: any[];
-	meta_categ_id?: string;
-	attributable?: boolean;
-	date_created?: string;
-}
+import { ICategory } from "./interfaces/ICategory";
+import { IProduct } from "./interfaces/IProduct";
+import { ISearchResults } from "./interfaces/ISearchResults";
 
 const apiError = (expectedStatus: number, status: number) => {
 	throw new Error(
@@ -43,3 +31,31 @@ export const getCategory = async (id: string): Promise<ICategory> => {
 	return await apiGet("https://api.mercadolibre.com/categories/" + id);
 };
 
+const SEARCH_URL = "https://api.mercadolibre.com/sites/MLB/search";
+
+export type SearchUrlParms = {
+	[name: string]: string;
+};
+
+const search = async (parms: SearchUrlParms): Promise<ISearchResults> => {
+	return apiGet(buildSearchUrl(parms));
+};
+
+export const buildSearchUrl = (parms: SearchUrlParms): string => {
+	const concatParms = Object.keys(parms)
+		.map((key) => key + "=" + encodeURI(parms[key]))
+		.join("&");
+	return SEARCH_URL + "?" + concatParms;
+};
+
+export const getProductsFromCategory = async (
+	categoryId: string
+): Promise<ISearchResults> => {
+	return await search({
+		category: categoryId,
+	});
+};
+
+export const getProduct = async (productId: string): Promise<IProduct> => {
+	return await apiGet(`https://api.mercadolibre.com/items/${productId}`);
+}

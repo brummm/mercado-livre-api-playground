@@ -35,14 +35,42 @@
 	.title {
 		background-image: linear-gradient($palleteBg 70%, rgba($palleteBg, 0) 90%);
 		padding: 70px $contentPadding;
+
+		.back {
+			align-items: center;
+			color: $pallete5;
+			display: flex;
+			font-size: 18px;
+			font-weight: bold;
+			svg {
+				height: 25px;
+				width: 25px;
+			}
+		}
 	}
 
 	&.shrink {
 		.title {
-			padding-bottom: 0;
-			padding-top: 0;
+			padding-bottom: 15px;
+			padding-top: 15px;
+			.back {
+				margin: -3px 0 0 -10px;
+				position: absolute;
+				svg {
+					height: 30px;
+					width: 30px;
+				}
+				span {
+					display: none;
+				}
+			}
 			h1 {
 				font-size: 22px;
+				overflow: hidden;
+				padding-left: 20px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 100%;
 			}
 		}
 	}

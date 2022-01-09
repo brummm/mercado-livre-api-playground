@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef } from "react";
-import { BiCart, BiMenu } from "react-icons/bi";
+import { BiCart, BiChevronLeft, BiMenu } from "react-icons/bi";
 import { PageTitle, PageTitleProps } from "../Texts";
 import styles from "./Header.module.scss";
 
@@ -12,9 +12,14 @@ export interface HeaderProps {
 	shrink: boolean;
 	title: string;
 	back?: HeaderBackButton;
-	titleType?: PageTitleProps["type"]
+	titleType?: PageTitleProps["type"];
 }
-export const Header: React.FC<HeaderProps> = ({ shrink, title, back, titleType }) => {
+export const Header: React.FC<HeaderProps> = ({
+	shrink,
+	title,
+	back,
+	titleType,
+}) => {
 	const headerRef = useRef(null);
 	const spacerRef = useRef(null);
 	const classNames = [styles.header];
@@ -43,15 +48,34 @@ export const Header: React.FC<HeaderProps> = ({ shrink, title, back, titleType }
 					</a>
 					<nav className={styles.menu}>
 						<ul>
-							<li><Link href="favoritos"><a>Favoritos</a></Link></li>
-							<li><Link href="creditos"><a>Créditos</a></Link></li>
+							<li>
+								<Link href="favoritos">
+									<a>Favoritos</a>
+								</Link>
+							</li>
+							<li>
+								<Link href="creditos">
+									<a>Créditos</a>
+								</Link>
+							</li>
 						</ul>
 					</nav>
 
-					<Link href="carrinho"><a className={styles.carrinho}><BiCart aria-label="Carrinho" /></a></Link>
+					<Link href="carrinho">
+						<a className={styles.carrinho}>
+							<BiCart aria-label="Carrinho" />
+						</a>
+					</Link>
 				</section>
 
 				<section className={styles.title}>
+					{back && (
+						<Link href={back.url}>
+							<a className={styles.back}>
+								<BiChevronLeft /> <span>{back.title}</span>
+							</a>
+						</Link>
+					)}
 					<PageTitle type={titleType}>{title}</PageTitle>
 				</section>
 			</header>
