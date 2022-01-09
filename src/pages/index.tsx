@@ -26,8 +26,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 function Home({ data }) {
 	return (
-		<Page>
-			<PageTitle>Categorias de Produtos</PageTitle>
+		<Page title="Categorias de Produtos">
 			<CategoryList data={data}></CategoryList>
 		</Page>
 	);

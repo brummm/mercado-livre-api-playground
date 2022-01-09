@@ -42,3 +42,4 @@ export const listCategories = async (): Promise<ICategory[]> => {
 export const getCategory = async (id: string): Promise<ICategory> => {
 	return await apiGet("https://api.mercadolibre.com/categories/" + id);
 };
+

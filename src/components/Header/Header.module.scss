@@ -1,0 +1,49 @@
+@import "../../styles/variables.scss";
+.header {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+
+	* {
+		transition: all 150ms;
+	}
+
+	.navigation {
+		align-items: center;
+		background-color: $pallete5;
+		color: $palleteBg;
+		display: flex;
+		font-size: 0;
+		justify-content: space-between;
+		padding: 10px 25px;
+
+		svg {
+			height: 35px;
+			width: 35px;
+		}
+
+		.menu {
+			ul {
+				display: none;
+			}
+		}
+
+		.carrinho {
+		}
+	}
+
+	.title {
+		background-image: linear-gradient($palleteBg 70%, rgba($palleteBg, 0) 90%);
+		padding: 70px $contentPadding;
+	}
+
+	&.shrink {
+		.title {
+			padding-bottom: 0;
+			padding-top: 0;
+			h1 {
+				font-size: 22px;
+			}
+		}
+	}
+}

@@ -1,13 +1,7 @@
-@import '../../styles/variables.scss';
-
-.mercadoLivre {
-	background-color: $palleteBg;
-	color: $pallete0;
-	padding: 10px;
-	text-align: center;
-}
+@import "../../styles/variables.scss";
 
 .main {
-	background-color: $pallete3;
+	background-color: $palleteBg;
+	clear: both;
 	padding: $contentPadding;
 }

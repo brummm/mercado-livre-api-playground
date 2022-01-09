@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.footer {
+	bottom: 0;
+	position: fixed;
+	width: 100vw;
+	.mercadoLivre {
+		background-color: $pallete3;
+		color: $pallete1;
+		padding: 10px;
+		text-align: center;
+	}
+}

@@ -1,13 +1,33 @@
-import React from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import Footer from "../Footer";
+import Header, { HeaderProps } from "../Header";
 import styles from "./Page.module.scss";
 
-export const Page: React.FC = ({children}) => {
+interface PageProps {
+	title: string;
+	titleType?: HeaderProps['titleType']
+}
+export const Page: React.FC<PageProps> = ({ children, title, titleType }) => {
+	const [shrink, setShrink] = useState(false);
+
+	useEffect(() => {
+		const scrollEvent = () => {
+			if (window.scrollY > 50) {
+				setShrink(true);
+			} else {
+				setShrink(false);
+			}
+		};
+		window.addEventListener("scroll", scrollEvent);
+		return () => {
+			window.removeEventListener("scroll", scrollEvent);
+		};
+	}, []);
 	return (
 		<>
-			<header className={styles.mercadoLivre}>
-				Usando a API do <a href="">Mercado Livre</a>
-			</header>
+			<Header shrink={shrink} title={title} titleType={titleType}></Header>
 			<main className={styles.main}>{children}</main>
+			<Footer />
 		</>
 	);
 };

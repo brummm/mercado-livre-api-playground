@@ -1,8 +1,5 @@
 @import "../../styles/variables.scss";
 
-.list {
-	padding-top: 45px;
-}
 
 .category {
 	$transitionTime: 150ms;
@@ -25,14 +22,13 @@
 		}
 	}
 	div {
-		background-color: $palleteBg;
-		box-shadow: inset 0px 0px 15px 15px $pallete3;
-		margin-left: -($contentPadding * 2);
-		margin-right: -($contentPadding * 2);
+		background-color: $pallete2;
+		margin-left: -($contentPadding);
+		margin-right: -($contentPadding);
 		max-height: 0;
 		opacity: 0;
 		overflow: hidden;
-		padding: $contentPadding $contentPadding * 2;
+		padding: $contentPadding;
 		position: relative;
 		transition: all $transition;
 		ul {
@@ -91,6 +87,7 @@
 				}
 			}
 			li {
+				font-size: 14px;
 				a {
 					color: $pallete1;
 					display: block;
