@@ -1,6 +1,6 @@
 import React from "react";
 import { ISearchResults } from "../../lib/interfaces/ISearchResults";
-import Loading from "../Loading";
+import Loading, { LoadingCentered } from "../Loading";
 import ProductLink from "./ProductLink";
 
 interface ProductListProps {
@@ -9,7 +9,7 @@ interface ProductListProps {
 }
 export const ProductList: React.FC<ProductListProps> = ({ data, error }) => {
 	if (error) return <p>Error</p>;
-	if (!data) return <Loading />;
+	if (!data) return <LoadingCentered />;
 	return (
 		<ul>
 			{data.results.map((product) => (

@@ -3,8 +3,8 @@ import Footer from "../Footer";
 import Header, { HeaderBackButton, HeaderProps } from "../Header";
 import styles from "./Page.module.scss";
 
-interface PageProps {
-	title: string;
+export interface PageProps {
+	title?: string;
 	titleType?: HeaderProps['titleType'];
 	back?: HeaderBackButton
 }

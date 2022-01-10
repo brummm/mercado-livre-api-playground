@@ -1,0 +1,14 @@
+@import "../../styles/variables.module.scss";
+
+.progress {
+	@include borderRadius;
+	background-color: $pallete3;
+	color: $pallete1;
+	display: inline-block;
+	font-size: 10px;
+	padding: 6px;
+	span {
+		display: inline-block;
+		padding: 0 2px;
+	}
+}

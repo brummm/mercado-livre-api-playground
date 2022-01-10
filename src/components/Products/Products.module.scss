@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/variables.module.scss";
 
 .link {
 	display: flex;
@@ -32,4 +32,14 @@
 			}
 		}
 	}
+}
+
+
+.details {
+	.pictures {
+		img {
+			max-width: 100%;
+		}
+	}
+
 }

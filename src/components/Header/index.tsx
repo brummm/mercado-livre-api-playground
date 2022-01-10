@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
 							</a>
 						</Link>
 					)}
-					<PageTitle type={titleType}>{title}</PageTitle>
+					{title && <PageTitle type={titleType}>{title}</PageTitle>}
 				</section>
 			</header>
 			<p ref={spacerRef}></p>

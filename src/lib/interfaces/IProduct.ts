@@ -1,4 +1,5 @@
 import { IInstallments } from "./IInstallments";
+import { IPicture } from "./IPicture";
 import { ISeller } from "./ISeller";
 
 
@@ -20,6 +21,7 @@ export interface IProduct {
 	permalink: string;
 	thumbnail: string;
 	thumbnail_id: string;
+	pictures: IPicture[];
 	accepts_mercadopago: boolean;
 	installments: IInstallments;
 	address: any;

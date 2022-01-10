@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 import { HeaderBackButton } from "../../components/Header";
-import Loading from "../../components/Loading";
+import { LoadingPage } from "../../components/Loading";
 import Page from "../../components/Page";
 import ProductList from "../../components/Products/ProductList";
 import { buildSearchUrl, getCategory } from "../../lib/api";
@@ -23,7 +23,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export const Category: React.FC<{ category: ICategory }> = ({ category }) => {
 	const router = useRouter();
 	if (router.isFallback) {
-		return <Loading />;
+		return <LoadingPage />;
 	}
 	const { id } = category;
 

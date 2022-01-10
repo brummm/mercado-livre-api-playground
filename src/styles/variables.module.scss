@@ -1,0 +1,26 @@
+$pallete0: #9C9C9C;
+$pallete1: #3B0479;
+$pallete2: #F5DD06;
+$pallete3: #00F1E3;
+$pallete5: #E000B7;
+$palleteBg: #fff;
+$palleteNeutral: #E0D7E9;
+$palleteNeutralDark: #AEA1BC;
+
+$borderRadius: 5px;
+$contentPadding: 30px;
+
+@mixin borderRadius {
+	border-radius: $borderRadius;
+}
+
+:export {
+	palleteBg: $palleteBg;
+	pallete0: $pallete0;
+	pallete1: $pallete1;
+	pallete2: $pallete2;
+	pallete3: $pallete3;
+	pallete5: $pallete5;
+	palleteNeutral: $palleteNeutral;
+	palleteNeutralDark: $palleteNeutralDark;
+}
