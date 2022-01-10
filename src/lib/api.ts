@@ -1,6 +1,7 @@
 import { ICategory } from "./interfaces/ICategory";
 import { IProduct } from "./interfaces/IProduct";
 import { ISearchResults } from "./interfaces/ISearchResults";
+import { ISeller } from "./interfaces/ISeller";
 
 const apiError = (expectedStatus: number, status: number) => {
 	throw new Error(
@@ -31,6 +32,10 @@ export const getCategory = async (id: string): Promise<ICategory> => {
 	return await apiGet("https://api.mercadolibre.com/categories/" + id);
 };
 
+export const getSeller = async (id: number): Promise<ISeller> => {
+	return await apiGet("https://api.mercadolibre.com/users/" + id);
+}
+
 const SEARCH_URL = "https://api.mercadolibre.com/sites/MLB/search";
 
 export type SearchUrlParms = {
@@ -58,4 +63,9 @@ export const getProductsFromCategory = async (
 
 export const getProduct = async (productId: string): Promise<IProduct> => {
 	return await apiGet(`https://api.mercadolibre.com/items/${productId}`);
+}
+
+
+export const stringToDate = (dateString: string): string => {
+	return '';
 }

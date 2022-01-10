@@ -1,0 +1,65 @@
+@import "../../styles/variables.module.scss";
+.button {
+	align-items: center;
+	display: flex;
+	svg {
+		color: $pallete1;
+	}
+	span {
+		color: $pallete5;
+		padding-left: 6px;
+		padding-top: 3px;
+	}
+}
+
+.content {
+	color: $pallete1;
+	font-size: 14px;
+
+	@mixin normalizeIconSize {
+		align-items: center;
+		display: flex;
+		height: 48px;
+		justify-content: center;
+	}
+	.rating {
+		@include borderRadius;
+		align-items: center;
+		background-color: $palleteBg;
+		display: flex;
+		justify-content: space-around;
+		margin: 17px 0 21px;
+		padding: 8px;
+		text-align: center;
+		.ratingLevel {
+			> div {
+				@include normalizeIconSize;
+			}
+			.rating5,
+			.rating4 {
+				color: $pallete5;
+			}
+		}
+
+		hr {
+			border: 1px solid $palleteNeutral;
+			height: 48px;
+		}
+
+		.percentage {
+			p:nth-child(1) {
+				@include normalizeIconSize;
+				font-size: 32px;
+				sup {
+					font-size: 18px;
+					font-weight: bold;
+					margin-top: -8%;
+				}
+			}
+		}
+
+	}
+	> p + p {
+		margin-top: 11px;
+	}
+}

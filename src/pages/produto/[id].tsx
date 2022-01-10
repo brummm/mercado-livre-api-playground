@@ -5,7 +5,7 @@ import { HeaderBackButton } from "../../components/Header";
 import { LoadingPage } from "../../components/Loading";
 import Page from "../../components/Page";
 import ProductDetails from "../../components/Products/ProductDetails";
-import { getCategory, getProduct } from "../../lib/api";
+import { getCategory, getProduct, getSeller } from "../../lib/api";
 import { ICategory } from "../../lib/interfaces/ICategory";
 import { IProduct } from "../../lib/interfaces/IProduct";
 
@@ -21,6 +21,7 @@ export async function getStaticProps({ params }) {
 			throw Error();
 		}
 		const category = await getCategory(product.category_id);
+		product.seller = await getSeller(product.seller_id);
 		return { props: { product, category } };
 	} catch (e) {
 		return {

@@ -26,7 +26,7 @@
 				font-weight: bold;
 			}
 			.secondary {
-				color: #9C9C9C;
+				color: #9c9c9c;
 				font-size: 12px;
 				font-weight: normal;
 			}
@@ -34,12 +34,62 @@
 	}
 }
 
-
 .details {
 	.pictures {
-		img {
-			max-width: 100%;
+		clear: none;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 100%;
+		a {
+			display: none;
+			&.current {
+				display: block;
+			}
+			img {
+				max-width: 100%;
+			}
 		}
 	}
 
+	.actions {
+		@include borderRadius;
+		align-items: center;
+		background-color: $palleteNeutral;
+		bottom: 75px;
+		color: $pallete1;
+		display: flex;
+		left: $contentPadding;
+		padding: 14px;
+		position: fixed;
+		right: $contentPadding;
+
+		div:nth-child(2) {
+			display: flex;
+			flex: 1;
+			justify-content: center;
+		}
+
+		.buttonCart {
+			@include borderRadius;
+			@include shadow;
+			align-items: center;
+			background-color: $pallete2;
+
+			display: flex;
+			font-size: 16px;
+			padding: 9px;
+			span {
+				font-weight: bold;
+				padding: 0 9px;
+				white-space: nowrap;
+			}
+		}
+
+		.buttonFavorites {
+		}
+	}
+
+	.seller {
+
+	}
 }

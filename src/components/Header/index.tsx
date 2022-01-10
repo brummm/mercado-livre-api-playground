@@ -1,6 +1,7 @@
+import { ChevronLeft, Menu } from "@styled-icons/boxicons-regular";
+import { Cart } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef } from "react";
-import { BiCart, BiChevronLeft, BiMenu } from "react-icons/bi";
+import React, { useEffect, useRef } from "react";
 import { PageTitle, PageTitleProps } from "../Texts";
 import styles from "./Header.module.scss";
 
@@ -44,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
 			<header ref={headerRef} className={classNames.join(" ")}>
 				<section className={styles.navigation}>
 					<a>
-						<BiMenu aria-label="Menu" />
+						<Menu aria-label="Menu" />
 					</a>
 					<nav className={styles.menu}>
 						<ul>
@@ -63,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
 
 					<Link href="carrinho">
 						<a className={styles.carrinho}>
-							<BiCart aria-label="Carrinho" />
+							<Cart aria-label="Carrinho" />
 						</a>
 					</Link>
 				</section>
@@ -72,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
 					{back && (
 						<Link href={back.url}>
 							<a className={styles.back}>
-								<BiChevronLeft /> <span>{back.title}</span>
+								<ChevronLeft /> <span>{back.title}</span>
 							</a>
 						</Link>
 					)}

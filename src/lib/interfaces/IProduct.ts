@@ -8,6 +8,7 @@ export interface IProduct {
 	site_id: string;
 	title: string;
 	seller: ISeller;
+	seller_id: number;
 	price: number;
 	prices: any;
 	sale_price: number | null;

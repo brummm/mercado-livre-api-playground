@@ -9,4 +9,7 @@ export interface ISeller {
 	tags: string[];
 	eshop: any;
 	seller_reputation: ISellerReputation;
+	nickname: string;
+	logo: string;
+	points: number;
 }

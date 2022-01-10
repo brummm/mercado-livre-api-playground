@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import {
-	BiChevronLeft,
-	BiChevronLeftCircle,
-	BiChevronRightCircle,
-} from "react-icons/bi";
+	ChevronLeft,
+	ChevronLeftCircle,
+	ChevronRightCircle,
+} from "@styled-icons/boxicons-regular";
 import { ICategory } from "../../lib/interfaces/ICategory";
 import styles from "./Category.module.scss";
 
@@ -143,7 +143,7 @@ export const Category: React.FC<CategoryProps> = ({
 				}}
 			>
 				<span>{name}</span>
-				<BiChevronLeft className={styles.icon} />
+				<ChevronLeft className={styles.icon} />
 			</button>
 			{opened && (
 				<div>
@@ -163,7 +163,7 @@ export const Category: React.FC<CategoryProps> = ({
 								previous();
 							}}
 						>
-							<BiChevronLeftCircle />
+							<ChevronLeftCircle />
 						</button>
 						<button
 							className={styles.navButton}
@@ -173,7 +173,7 @@ export const Category: React.FC<CategoryProps> = ({
 								next();
 							}}
 						>
-							<BiChevronRightCircle />
+							<ChevronRightCircle />
 						</button>
 					</nav>
 				</div>
