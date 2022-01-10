@@ -13,7 +13,7 @@ import PageOverlay from "../Page/PageOverlay";
 import styles from "./Seller.module.scss";
 
 export const SellerViewButton: React.FC<{ seller: ISeller }> = ({ seller }) => {
-	const [detailsOpened, setDetailsOpened] = useState(true);
+	const [detailsOpened, setDetailsOpened] = useState(false);
 	const openDetails = useCallback(() => {
 		setDetailsOpened(true);
 	}, [seller]);

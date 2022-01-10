@@ -2,7 +2,6 @@ import { GetStaticProps } from "next";
 import React from "react";
 import { CategoryList } from "../components/Category";
 import Page from "../components/Page";
-import { PageTitle } from "../components/Texts";
 import { getCategory, listCategories } from "../lib/api";
 
 export const getStaticProps: GetStaticProps = async (context) => {

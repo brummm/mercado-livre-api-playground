@@ -143,7 +143,7 @@ export const Category: React.FC<CategoryProps> = ({
 				}}
 			>
 				<span>{name}</span>
-				<ChevronLeft className={styles.icon} />
+				<ChevronLeft size={32} className={styles.icon} />
 			</button>
 			{opened && (
 				<div>
@@ -163,7 +163,7 @@ export const Category: React.FC<CategoryProps> = ({
 								previous();
 							}}
 						>
-							<ChevronLeftCircle />
+							<ChevronLeftCircle size={48} />
 						</button>
 						<button
 							className={styles.navButton}
@@ -173,7 +173,7 @@ export const Category: React.FC<CategoryProps> = ({
 								next();
 							}}
 						>
-							<ChevronRightCircle />
+							<ChevronRightCircle size={48} />
 						</button>
 					</nav>
 				</div>
