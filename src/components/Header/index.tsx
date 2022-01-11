@@ -1,7 +1,7 @@
 import { ChevronLeft, Menu } from "@styled-icons/boxicons-regular";
 import { Cart } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { PageTitle, PageTitleProps } from "../Texts";
 import styles from "./Header.module.scss";
 
@@ -23,22 +23,27 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
 	const headerRef = useRef(null);
 	const spacerRef = useRef(null);
-	const classNames = [styles.header];
-	if (shrink) {
-		classNames.push(styles.shrink);
-	}
+	const [classNames, setClassNames] = useState([styles.header]);
 
 	const updateSpacer = () => {
 		spacerRef.current.style.height = headerRef.current.offsetHeight + "px";
-		// console.log(headerRef.current.offsetHeight);
 	};
 
+	const updateClassName = useCallback(() => {
+		const _classNames = [styles.header];
+		if (shrink) {
+			_classNames.push(styles.shrink);
+		}
+		setClassNames(_classNames);
+	}, [shrink]);
+
 	useEffect(() => {
-		const updateSpacerInterval = setInterval(updateSpacer, 20);
-		return () => {
-			clearTimeout(updateSpacerInterval);
-		};
+		updateSpacer();
 	}, []);
+
+	useEffect(() => {
+		updateClassName();
+	}, [shrink]);
 
 	return (
 		<>

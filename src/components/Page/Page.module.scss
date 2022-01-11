@@ -7,6 +7,7 @@
 }
 
 .overlay {
+	animation: fade-in .4s ease-in both;
 	align-items: center;
 	background: rgba(0, 0, 0, 0.25);
 	backdrop-filter: blur(15px);
@@ -14,23 +15,13 @@
 	height: 100vh;
 	justify-content: center;
 	left: 0px;
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	width: 100vw;
 	z-index: 20;
 
 	.window {
-
-		animation: 10s ease-out 0s 1 slideInFromBottom;
-
-		@keyframes slideInFromLeft {
-			0% {
-					transform: translateY(-100%);
-			}
-			100% {
-					transform: translateY(0);
-			}
-	}
+		animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
 		@include borderRadius;
 		@include shadow;
@@ -52,7 +43,32 @@
 			}
 		}
 		.content {
-
 		}
+	}
+}
+
+.preventScroll {
+	height: 100vh;
+	overflow: hidden;
+	transition: all 150ms ease-out;
+}
+
+@keyframes slide-top {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

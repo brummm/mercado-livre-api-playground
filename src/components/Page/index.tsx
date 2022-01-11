@@ -5,15 +5,20 @@ import styles from "./Page.module.scss";
 
 export interface PageProps {
 	title?: string;
-	titleType?: HeaderProps['titleType'];
-	back?: HeaderBackButton
+	titleType?: HeaderProps["titleType"];
+	back?: HeaderBackButton;
 }
-export const Page: React.FC<PageProps> = ({ children, title, titleType, back }) => {
+export const Page: React.FC<PageProps> = ({
+	children,
+	title,
+	titleType,
+	back,
+}) => {
 	const [shrink, setShrink] = useState(false);
 
 	useEffect(() => {
 		const scrollEvent = () => {
-			if (window.scrollY > 50) {
+			if (window.scrollY > 75) {
 				setShrink(true);
 			} else {
 				setShrink(false);
@@ -26,7 +31,12 @@ export const Page: React.FC<PageProps> = ({ children, title, titleType, back }) 
 	}, []);
 	return (
 		<>
-			<Header shrink={shrink} title={title} titleType={titleType} back={back}></Header>
+			<Header
+				shrink={shrink}
+				title={title}
+				titleType={titleType}
+				back={back}
+			></Header>
 			<main className={styles.main}>{children}</main>
 			<Footer />
 		</>
