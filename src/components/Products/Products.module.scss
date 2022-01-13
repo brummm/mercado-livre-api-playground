@@ -1,41 +1,13 @@
 @import "../../styles/variables.module.scss";
 
-.link {
-	display: flex;
-	margin-bottom: 10px;
-	figure {
-		width: 90px;
-		img {
-			max-height: 90px;
-			width: 100%;
-		}
-	}
-	.data {
-		flex: 1;
-		margin-left: 14px;
-		h2 {
-			font-size: 14px;
-			color: $pallete1;
-		}
-		.prices {
-			display: flex;
-			margin-top: 6px;
-			.main {
-				color: $pallete5;
-				font-size: 14px;
-				font-weight: bold;
-			}
-			.secondary {
-				color: #9c9c9c;
-				font-size: 12px;
-				font-weight: normal;
-			}
-		}
-	}
-}
-
 .details {
 	padding-bottom: 150px;
+
+	.separator {
+		border: 1px solid $palleteNeutral;
+		margin: 32px 0;
+	}
+
 	.pictures {
 		clear: none;
 		overflow: hidden;
@@ -52,10 +24,53 @@
 		}
 	}
 
+	.prices {
+		margin-bottom: 32px;
+		p.originalPrice {
+			color: $palleteNeutralDark;
+			font-size: 12px;
+			text-decoration: line-through;
+		}
+		p.price {
+			color: $pallete5;
+			font-size: 24px;
+			font-weight: bold;
+		}
+	}
+
+	.block {
+		color: $pallete1;
+		font-size: 14px;
+
+		h2 {
+			font-size: 18px;
+		}
+
+		.content {
+			margin: 16px 0;
+			&.description {
+				p {
+					margin-bottom: 8px;
+				}
+			}
+		}
+
+		a.more {
+			color: $pallete5;
+			margin-top: 14px;
+		}
+
+		&.attributes {
+		}
+
+
+	}
+
+
 	.actions {
 		@include borderRadius;
 		align-items: center;
-		background-color: $palleteNeutral;
+		background-color: rgba($palleteNeutralDark, .25);
 		bottom: 75px;
 		color: $pallete1;
 		display: flex;

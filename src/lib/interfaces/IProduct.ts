@@ -1,5 +1,6 @@
 import { IInstallments } from "./IInstallments";
 import { IPicture } from "./IPicture";
+import { IProductAttributes } from "./IProductAttributes";
 import { ISeller } from "./ISeller";
 
 
@@ -34,7 +35,7 @@ export interface IProduct {
 		store_pick_up: boolean;
 	};
 	seller_address: any;
-	attributes: any[];
+	attributes: IProductAttributes[];
 	differential_pricing: { id: number; };
 	original_price: number;
 	category_id: string;

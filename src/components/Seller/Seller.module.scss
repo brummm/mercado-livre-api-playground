@@ -16,12 +16,6 @@
 	color: $pallete1;
 	font-size: 14px;
 
-	@mixin normalizeIconSize {
-		align-items: center;
-		display: flex;
-		height: 48px;
-		justify-content: center;
-	}
 	.rating {
 		@include borderRadius;
 		align-items: center;
@@ -32,9 +26,6 @@
 		padding: 8px;
 		text-align: center;
 		.ratingLevel {
-			> div {
-				@include normalizeIconSize;
-			}
 			.rating5,
 			.rating4 {
 				color: $pallete5;
@@ -48,7 +39,6 @@
 
 		.percentage {
 			p:nth-child(1) {
-				@include normalizeIconSize;
 				font-size: 32px;
 				sup {
 					font-size: 18px;

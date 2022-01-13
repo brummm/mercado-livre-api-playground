@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import { IProduct } from "../../lib/interfaces/IProduct";
-import Price from "./Price";
-import styles from './Products.module.scss';
+import { IProduct } from "../../../lib/interfaces/IProduct";
+import Price from "../Price";
+import styles from './ProductLink.module.scss';
 
 interface Props {
 	product: IProduct;

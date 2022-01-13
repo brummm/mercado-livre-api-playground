@@ -1,6 +1,6 @@
 import React from "react";
 import { ISearchResults } from "../../lib/interfaces/ISearchResults";
-import Loading, { LoadingCentered } from "../Loading";
+import { LoadingCentered } from "../Loading";
 import ProductLink from "./ProductLink";
 
 interface ProductListProps {

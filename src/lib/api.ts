@@ -36,6 +36,10 @@ export const getSeller = async (id: number): Promise<ISeller> => {
 	return await apiGet("https://api.mercadolibre.com/users/" + id);
 }
 
+export const getDescription = async (id: number): Promise<{text: string, plain_text: string}> => {
+	return await apiGet(`https://api.mercadolibre.com/items/${id}/description`);
+}
+
 const SEARCH_URL = "https://api.mercadolibre.com/sites/MLB/search";
 
 export type SearchUrlParms = {

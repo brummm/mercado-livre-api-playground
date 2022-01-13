@@ -5,7 +5,12 @@ import { HeaderBackButton } from "../../components/Header";
 import { LoadingPage } from "../../components/Loading";
 import Page from "../../components/Page";
 import ProductDetails from "../../components/Products/ProductDetails";
-import { getCategory, getProduct, getSeller } from "../../lib/api";
+import {
+	getCategory,
+	getDescription,
+	getProduct,
+	getSeller,
+} from "../../lib/api";
 import { ICategory } from "../../lib/interfaces/ICategory";
 import { IProduct } from "../../lib/interfaces/IProduct";
 
@@ -20,18 +25,36 @@ export async function getStaticProps({ params }) {
 		if (!product) {
 			throw Error();
 		}
-		const category = await getCategory(product.category_id);
-		product.seller = await getSeller(product.seller_id);
-		return { props: { product, category } };
+
+		const promiseCategory = getCategory(product.category_id);
+		const promiseSeller = getSeller(product.seller_id);
+		const promiseDescription = getDescription(id);
+		await Promise.allSettled([
+			promiseCategory,
+			promiseSeller,
+			promiseDescription,
+		]);
+		const category = await promiseCategory;
+		product.seller = await promiseSeller;
+		const { plain_text: description } = await promiseDescription;
+
+		return { props: { product, category, description } };
 	} catch (e) {
 		return {
 			notFound: true,
 		};
 	}
 }
-export const Product: React.FC<{ product: IProduct; category: ICategory }> = ({
+
+interface Props {
+	product: IProduct;
+	category: ICategory;
+	description: string;
+}
+export const Product: React.FC<Props> = ({
 	product,
 	category,
+	description,
 }) => {
 	const router = useRouter();
 	if (router.isFallback) {
@@ -53,7 +76,7 @@ export const Product: React.FC<{ product: IProduct; category: ICategory }> = ({
 
 	return (
 		<Page title={product.title} titleType="small" back={back}>
-			<ProductDetails product={product} />
+			<ProductDetails product={product} description={description} />
 		</Page>
 	);
 };

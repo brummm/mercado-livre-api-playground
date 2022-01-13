@@ -1,0 +1,33 @@
+.link {
+	display: flex;
+	margin-bottom: 10px;
+	figure {
+		width: 90px;
+		img {
+			max-height: 90px;
+			width: 100%;
+		}
+	}
+	.data {
+		flex: 1;
+		margin-left: 14px;
+		h2 {
+			font-size: 14px;
+			color: $pallete1;
+		}
+		.prices {
+			display: flex;
+			margin-top: 6px;
+			.main {
+				color: $pallete5;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			.secondary {
+				color: #9c9c9c;
+				font-size: 12px;
+				font-weight: normal;
+			}
+		}
+	}
+}

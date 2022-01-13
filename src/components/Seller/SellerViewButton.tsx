@@ -13,31 +13,30 @@ import PageOverlay from "../Page/PageOverlay";
 import styles from "./Seller.module.scss";
 
 export const SellerViewButton: React.FC<{ seller: ISeller }> = ({ seller }) => {
-	const [detailsOpened, setDetailsOpened] = useState(false);
-	const openDetails = useCallback(() => {
-		setDetailsOpened(true);
-	}, [seller]);
+	const { seller_reputation, registration_date } = seller;
+	const { ratings, completed } = seller_reputation.transactions;
+	const ratingPercentage = Math.round(ratings.positive * 100);
 
-	const closeDetails = useCallback(() => {
-		setDetailsOpened(false);
-	}, [seller]);
+	const date = new Date(registration_date);
+	const sellerRegistrationFormatted = `${("0" + date.getMonth()).slice(
+		-2
+	)}/${date.getFullYear()}`;
 
-	let overlay;
+	const hash = "#seller-details";
 
-	if (detailsOpened) {
-		const { seller_reputation, registration_date } = seller;
-		const { ratings, completed } = seller_reputation.transactions;
-		const ratingPercentage = Math.round(ratings.positive * 100);
-
-		const ratingLevel = seller_reputation.level_id[0];
-		const date = new Date(registration_date);
-
-		overlay = (
-			<PageOverlay closeFunction={closeDetails} title={seller.nickname}>
+	return (
+		<>
+			<a className={styles.button} href={hash}>
+				<Store size={24} />
+				<span>
+					Vendido por <strong>{seller.nickname}</strong>
+				</span>
+			</a>
+			<PageOverlay title={seller.nickname} hash={hash}>
 				<div className={styles.content}>
 					<section className={styles.rating}>
 						<section className={styles.ratingLevel}>
-							<SellerRatingLevel level={ratingLevel} />
+							<SellerRatingLevel level={ratingPercentage} />
 						</section>
 
 						<hr />
@@ -51,62 +50,42 @@ export const SellerViewButton: React.FC<{ seller: ISeller }> = ({ seller }) => {
 								<span>avaliações positivas</span>
 							</p>
 						</section>
-
 					</section>
-						<p>Cadastrado em <strong>{`${("0"+ date.getMonth()).slice(-2)}/${date.getFullYear()}`}</strong></p>
-						<p>Quantidade de vendas <strong>{completed.toLocaleString()}</strong></p>
+					<p>
+						Cadastrado em <strong>{sellerRegistrationFormatted}</strong>
+					</p>
+					<p>
+						Quantidade de vendas <strong>{completed.toLocaleString()}</strong>
+					</p>
 				</div>
 			</PageOverlay>
-		);
-	}
-
-	return (
-		<>
-			<button
-				className={styles.button}
-				onClick={(e) => {
-					e.preventDefault();
-					openDetails();
-				}}
-			>
-				<Store size={24} />
-				<span>
-					Vendido por <strong>{seller.nickname}</strong>
-				</span>
-			</button>
-			{detailsOpened && overlay}
 		</>
 	);
 };
 
-const SellerRatingLevel: React.FC<{ level: string }> = ({ level }) => {
+const SellerRatingLevel: React.FC<{ level: number }> = ({ level }) => {
 	const size = 44;
-	let text, icon;
-	switch (level) {
-		case "5":
+	let text = "Não definido.";
+	let icon = <MehBlank size={size} className={styles.noRating} />;
+	if (level !== undefined) {
+		if (level > 80) {
 			icon = <HappyBeaming size={size} className={styles.rating5} />;
 			text = "Excelente!";
-			break;
-		case "4":
+		} else if (level > 60) {
 			icon = <Happy size={size} className={styles.rating4} />;
-			text = 'Bom.';
-			break;
-		case "3":
+			text = "Bom.";
+		} else if (level > 40) {
 			icon = <Meh size={size} className={styles.rating3} />;
-			text = 'Regular.';
-			break;
-		case "2":
+			text = "Regular.";
+		} else if (level > 20) {
 			icon = <Confused size={size} className={styles.rating2} />;
-			text = 'Irregular.';
-			break;
-		case "1":
+			text = "Irregular.";
+		} else {
 			icon = <Sad size={size} className={styles.rating1} />;
-			text = 'Ruim.';
-			break;
-		default:
-			icon = <MehBlank size={size} className={styles.noRating} />;
-			text = "Não definido.";
+			text = "Ruim.";
+		}
 	}
+
 	return (
 		<>
 			<div className={styles.icon}>{icon}</div>
