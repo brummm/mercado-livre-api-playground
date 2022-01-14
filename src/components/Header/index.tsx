@@ -2,6 +2,7 @@ import { ChevronLeft, Menu } from "@styled-icons/boxicons-regular";
 import { Cart } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import useShoppingCart from "../../hooks/shoppingCart";
 import { PageTitle, PageTitleProps } from "../Texts";
 import styles from "./Header.module.scss";
 
@@ -24,6 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
 	const headerRef = useRef(null);
 	const spacerRef = useRef(null);
 	const [classNames, setClassNames] = useState([styles.header]);
+	const { totalItemsCarrinho } = useShoppingCart();
 
 	const updateSpacer = () => {
 		spacerRef.current.style.height = headerRef.current.offsetHeight + "px";
@@ -69,6 +71,9 @@ export const Header: React.FC<HeaderProps> = ({
 
 					<Link href="carrinho">
 						<a className={styles.carrinho}>
+							<p aria-label="Total de itens no carrinho">
+								{totalItemsCarrinho}
+							</p>
 							<Cart aria-label="Carrinho" />
 						</a>
 					</Link>

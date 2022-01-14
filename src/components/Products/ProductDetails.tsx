@@ -1,6 +1,7 @@
 import { Heart } from "@styled-icons/boxicons-regular";
 import { CartAdd } from "@styled-icons/boxicons-solid";
 import React, { useState } from "react";
+import useShoppingCart from "../../hooks/shoppingCart";
 import { IProduct } from "../../lib/interfaces/IProduct";
 import PageOverlay from "../Page/PageOverlay";
 import { Progress } from "../Progress";
@@ -16,17 +17,14 @@ interface Props {
 }
 
 export const ProductDetails: React.FC<Props> = ({ product, description }) => {
+	const { addProduct } = useShoppingCart();
 	const { pictures, seller, attributes } = product;
 
-	const [currentPicture, setCurrentPicture] = useState(1);
-	const [infoVisible, setInfoVisible] = useState(false);
+	const filteredAttributes = attributes.filter(
+		({ value_name }) => value_name !== null && value_name.length > 0
+	);
 
-	const showInfo = () => {
-		setInfoVisible(true);
-	};
-	const hideInfo = () => {
-		setInfoVisible(false);
-	};
+	const [currentPicture, setCurrentPicture] = useState(1);
 
 	return (
 		<section className={styles.details}>
@@ -60,7 +58,12 @@ export const ProductDetails: React.FC<Props> = ({ product, description }) => {
 
 			<section className={styles.actions}>
 				<div>
-					<button className={styles.buttonCart}>
+					<button
+						className={styles.buttonCart}
+						onClick={() => {
+							addProduct(product);
+						}}
+					>
 						<CartAdd size={32} />
 						<span>Adicionar ao carrinho</span>
 					</button>
@@ -83,18 +86,16 @@ export const ProductDetails: React.FC<Props> = ({ product, description }) => {
 			<section className={styles.block + " " + styles.attributes}>
 				<h2>Informações do Produto</h2>
 				<section className={styles.content}>
-					<ProductAttributes attributes={attributes.slice(0, 3)} />
+					<ProductAttributes attributes={filteredAttributes.slice(0, 3)} />
 				</section>
-				{attributes.length > 3 && (
-					<a className={styles.more} href="#info" onClick={showInfo}>
+				{filteredAttributes.length > 3 && (
+					<a className={styles.more} href="#info">
 						ver todas as informações
 					</a>
 				)}
-				{infoVisible && (
-					<PageOverlay title="Informações do Produto" hash="#info">
-						<ProductAttributes attributes={attributes} />
-					</PageOverlay>
-				)}
+				<PageOverlay title="Informações do Produto" hash="#info">
+					<ProductAttributes attributes={attributes} />
+				</PageOverlay>
 			</section>
 
 			<hr className={styles.separator} />

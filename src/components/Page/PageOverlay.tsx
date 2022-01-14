@@ -9,9 +9,11 @@ interface Props {
 export const PageOverlay: React.FC<Props> = ({ title, children, hash }) => {
 	const [visible, setVisible] = useState(false);
 
-	const close = useCallback(() => {
+	const close = () => {
+		console.log('close');
+
 		history.back();
-	}, []);
+	};
 
 	const hashChange = useCallback(() => {
 		const _visible = location.hash && location.hash === hash;
@@ -37,7 +39,6 @@ export const PageOverlay: React.FC<Props> = ({ title, children, hash }) => {
 		return null;
 	}
 
-
 	return (
 		<div className={styles.overlay} onClick={close}>
 			<div className={styles.window}>
@@ -47,6 +48,7 @@ export const PageOverlay: React.FC<Props> = ({ title, children, hash }) => {
 						className={styles.close}
 						onClick={(e) => {
 							e.preventDefault();
+							e.stopPropagation();
 							close();
 						}}
 					>
