@@ -37,6 +37,7 @@ export const PageOverlay: React.FC<Props> = ({ title, children, hash }) => {
 		return null;
 	}
 
+
 	return (
 		<div className={styles.overlay} onClick={close}>
 			<div className={styles.window}>
