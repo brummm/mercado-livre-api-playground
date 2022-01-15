@@ -1,6 +1,7 @@
 import { Heart } from "@styled-icons/boxicons-regular";
 import { CartAdd } from "@styled-icons/boxicons-solid";
 import React, { useState } from "react";
+import useI18n from "../../hooks/i18n";
 import useShoppingCart from "../../hooks/shoppingCart";
 import { IProduct } from "../../lib/interfaces/IProduct";
 import PageOverlay from "../Page/PageOverlay";
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const ProductDetails: React.FC<Props> = ({ product, description }) => {
+	const { t } = useI18n();
 	const { addProduct } = useShoppingCart();
 	const { pictures, seller, attributes } = product;
 
@@ -65,7 +67,7 @@ export const ProductDetails: React.FC<Props> = ({ product, description }) => {
 						}}
 					>
 						<CartAdd size={32} />
-						<span>Adicionar ao carrinho</span>
+						<span>{t("Add to cart")}</span>
 					</button>
 				</div>
 				<div>

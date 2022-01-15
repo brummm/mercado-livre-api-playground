@@ -28,23 +28,42 @@
 			}
 		}
 
-		.carrinho {
-			p {
-				align-items: center;
-				aspect-ratio: 1 / 1;
-				background-color: $pallete4;
-				border-radius: 999px;
-				display: flex;
-				font-size: 12px;
+		.localesCart {
+			align-items: center;
+			display: flex;
+
+			.locales {
+				margin-right: 15px;
+				font-size: 20px;
 				font-weight: bold;
-				height: 20px;
-				justify-content: center;
 				letter-spacing: -1px;
-				margin-left: 35px;
-				position: absolute;
-				text-align: center;
-				transform: translate(-50%, -3px);
-				z-index: 11;
+				text-transform: uppercase;
+				li a {
+					@include expandClickable();
+				}
+			}
+
+			.cart {
+				a {
+					@include expandClickable();
+					p {
+						align-items: center;
+						aspect-ratio: 1 / 1;
+						background-color: $pallete4;
+						border-radius: 999px;
+						display: flex;
+						font-size: 12px;
+						font-weight: bold;
+						height: 20px;
+						justify-content: center;
+						letter-spacing: -1px;
+						margin-left: 35px;
+						position: absolute;
+						text-align: center;
+						transform: translate(-50%, -3px);
+						z-index: 11;
+					}
+				}
 			}
 		}
 	}

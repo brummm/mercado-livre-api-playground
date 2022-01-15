@@ -2,6 +2,7 @@ import { ChevronLeft, Menu } from "@styled-icons/boxicons-regular";
 import { Cart } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import useI18n from "../../hooks/i18n";
 import useShoppingCart from "../../hooks/shoppingCart";
 import { PageTitle, PageTitleProps } from "../Texts";
 import styles from "./Header.module.scss";
@@ -26,6 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
 	const spacerRef = useRef(null);
 	const [classNames, setClassNames] = useState([styles.header]);
 	const { totalItemsCarrinho } = useShoppingCart();
+	const { locales, locale } = useI18n();
 
 	const updateSpacer = () => {
 		spacerRef.current.style.height = headerRef.current.offsetHeight + "px";
@@ -69,14 +71,30 @@ export const Header: React.FC<HeaderProps> = ({
 						</ul>
 					</nav>
 
-					<Link href="carrinho">
-						<a className={styles.carrinho}>
-							<p aria-label="Total de itens no carrinho">
-								{totalItemsCarrinho}
-							</p>
-							<Cart aria-label="Carrinho" />
-						</a>
-					</Link>
+					<section className={styles.localesCart}>
+						<nav className={styles.locales}>
+							<ul>
+								{locales
+									.filter((_locale) => _locale !== locale)
+									.map((locale) => (
+										<li key={locale}>
+											<Link href="./" locale={locale}>
+												<a>{locale}</a>
+											</Link>
+										</li>
+									))}
+							</ul>
+						</nav>
+
+						<Link href="carrinho">
+							<a className={styles.cart}>
+								<p aria-label="Total de itens no carrinho">
+									{totalItemsCarrinho}
+								</p>
+								<Cart aria-label="Carrinho" />
+							</a>
+						</Link>
+					</section>
 				</section>
 
 				<section className={styles.title}>

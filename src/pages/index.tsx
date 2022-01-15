@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import React from "react";
 import { CategoryList } from "../components/Category";
 import Page from "../components/Page";
+import useI18n from "../hooks/i18n";
 import { getCategory, listCategories } from "../lib/api";
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -9,6 +10,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	if (data === null) {
 		return { notFound: true };
 	}
+
 
 	const promises = data.map(async (category) => {
 		const request = await getCategory(category.id);
@@ -24,8 +26,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 function Home({ data }) {
+	const { t, locale } = useI18n();
+	console.log(locale);
+
 	return (
-		<Page title="Categorias de Produtos">
+		<Page title={t("Product Categories")}>
 			<CategoryList data={data}></CategoryList>
 		</Page>
 	);

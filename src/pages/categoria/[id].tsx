@@ -5,6 +5,7 @@ import { HeaderBackButton } from "../../components/Header";
 import { LoadingPage } from "../../components/Loading";
 import Page from "../../components/Page";
 import ProductList from "../../components/Products/ProductList";
+import useI18n from "../../hooks/i18n";
 import { buildSearchUrl, getCategory } from "../../lib/api";
 import { ICategory } from "../../lib/interfaces/ICategory";
 
@@ -25,6 +26,7 @@ export const Category: React.FC<{ category: ICategory }> = ({ category }) => {
 	if (router.isFallback) {
 		return <LoadingPage />;
 	}
+	const { t } = useI18n();
 	const { id } = category;
 
 	const { data, error } = useSWR(buildSearchUrl({ category: id }), fetcher);

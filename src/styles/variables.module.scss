@@ -20,13 +20,15 @@ $contentPadding: 30px;
 				0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-@mixin expandClickable($width: 50px, $height: 50px, $debug: false) {
+@mixin expandClickable($padding: 10px, $debug: false) {
+	position: relative;
 	&:before {
 		content: "";
 		position: absolute;
-		width: $width;
-		height: $height;
-		transform: translate(-25%, -25%);
+		bottom: -$padding;
+		left: -$padding;
+		right: -$padding;
+		top: -$padding;
 		@if $debug == true {
 			background: #e8347455;
 		}
