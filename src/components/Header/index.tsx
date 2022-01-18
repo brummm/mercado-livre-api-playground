@@ -1,4 +1,4 @@
-import { ChevronLeft, Menu } from "@styled-icons/boxicons-regular";
+import { ChevronLeft } from "@styled-icons/boxicons-regular";
 import { Cart } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -6,6 +6,7 @@ import useI18n from "../../hooks/i18n";
 import useShoppingCart from "../../hooks/shoppingCart";
 import { PageTitle, PageTitleProps } from "../Texts";
 import styles from "./Header.module.scss";
+import Navigation from "./Navigation";
 
 export interface HeaderBackButton {
 	title: string;
@@ -25,6 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
 	const headerRef = useRef(null);
 	const spacerRef = useRef(null);
+	const { t } = useI18n();
 	const [classNames, setClassNames] = useState([styles.header]);
 	const { totalItemsCarrinho } = useShoppingCart();
 	const { locales, locale } = useI18n();
@@ -53,23 +55,8 @@ export const Header: React.FC<HeaderProps> = ({
 		<>
 			<header ref={headerRef} className={classNames.join(" ")}>
 				<section className={styles.navigation}>
-					<a>
-						<Menu aria-label="Menu" />
-					</a>
-					<nav className={styles.menu}>
-						<ul>
-							<li>
-								<Link href="favoritos">
-									<a>Favoritos</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="creditos">
-									<a>Créditos</a>
-								</Link>
-							</li>
-						</ul>
-					</nav>
+
+					<Navigation />
 
 					<section className={styles.localesCart}>
 						<nav className={styles.locales}>
@@ -86,9 +73,9 @@ export const Header: React.FC<HeaderProps> = ({
 							</ul>
 						</nav>
 
-						<Link href="carrinho">
+						<Link href="cart">
 							<a className={styles.cart}>
-								<p aria-label="Total de itens no carrinho">
+								<p aria-label={t("Total items in cart.")}>
 									{totalItemsCarrinho}
 								</p>
 								<Cart aria-label="Carrinho" />

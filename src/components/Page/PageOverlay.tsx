@@ -10,8 +10,6 @@ export const PageOverlay: React.FC<Props> = ({ title, children, hash }) => {
 	const [visible, setVisible] = useState(false);
 
 	const close = () => {
-		console.log('close');
-
 		history.back();
 	};
 

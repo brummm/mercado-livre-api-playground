@@ -1,5 +1,16 @@
 {
+	"Close Menu": "Fechar menu",
+	"Total items in cart.": "Total de itens no carrinho.",
+	"Using {1}'s Api.": "Usando a API do {1}.",
+	"Favorites": "Favoritos",
+	"Credits": "Créditos",
+
 	"Product Categories": "Categorias de Produtos",
-	"Add to cart": "Adicionar ao carrinho",
-	"Using {1}'s Api.": "Usando a API do {1}."
+
+	"Product info": "Informações do Produto",
+	"see all info": "ver todas as infomações",
+	"Description": "Descrição",
+	"read more": "ver mais",
+	"less": "menos",
+	"Add to cart": "Adicionar ao carrinho"
 }

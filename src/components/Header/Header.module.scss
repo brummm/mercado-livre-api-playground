@@ -22,12 +22,6 @@
 			width: 35px;
 		}
 
-		.menu {
-			ul {
-				display: none;
-			}
-		}
-
 		.localesCart {
 			align-items: center;
 			display: flex;
@@ -43,26 +37,24 @@
 				}
 			}
 
-			.cart {
-				a {
-					@include expandClickable();
-					p {
-						align-items: center;
-						aspect-ratio: 1 / 1;
-						background-color: $pallete4;
-						border-radius: 999px;
-						display: flex;
-						font-size: 12px;
-						font-weight: bold;
-						height: 20px;
-						justify-content: center;
-						letter-spacing: -1px;
-						margin-left: 35px;
-						position: absolute;
-						text-align: center;
-						transform: translate(-50%, -3px);
-						z-index: 11;
-					}
+			a.cart {
+				@include expandClickable();
+				p {
+					align-items: center;
+					aspect-ratio: 1 / 1;
+					background-color: $pallete4;
+					border-radius: 999px;
+					display: flex;
+					font-size: 12px;
+					font-weight: bold;
+					height: 20px;
+					justify-content: center;
+					letter-spacing: -1px;
+					margin-left: 35px;
+					position: absolute;
+					text-align: center;
+					transform: translate(-50%, -3px);
+					z-index: 4;
 				}
 			}
 		}

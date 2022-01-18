@@ -1,5 +1,16 @@
 {
+	"Close Menu": "Close Menu",
+	"Total items in cart.": "Total items in cart",
+	"Using {1}'s Api.": "Using {1}'s Api.",
+	"Favorites": "Favorites",
+	"Credits": "Credits",
+
 	"Product Categories": "Product Categories",
-	"Add to cart": "Add to cart",
-	"Using {1}'s Api.": "Using {1}'s Api."
+
+	"Product info": "Product info",
+	"see all info": "see all info",
+	"Description": "Description",
+	"read more": "read more",
+	"less": "less",
+	"Add to cart": "Add to cart"
 }

@@ -86,16 +86,16 @@ export const ProductDetails: React.FC<Props> = ({ product, description }) => {
 			<hr className={styles.separator} />
 
 			<section className={styles.block + " " + styles.attributes}>
-				<h2>Informações do Produto</h2>
+				<h2>{t('Product info')}</h2>
 				<section className={styles.content}>
 					<ProductAttributes attributes={filteredAttributes.slice(0, 3)} />
 				</section>
 				{filteredAttributes.length > 3 && (
 					<a className={styles.more} href="#info">
-						ver todas as informações
+						{t('see all info')}
 					</a>
 				)}
-				<PageOverlay title="Informações do Produto" hash="#info">
+				<PageOverlay title={t('Product info')} hash="#info">
 					<ProductAttributes attributes={attributes} />
 				</PageOverlay>
 			</section>
@@ -103,7 +103,7 @@ export const ProductDetails: React.FC<Props> = ({ product, description }) => {
 			<hr className={styles.separator} />
 
 			<section className={styles.block}>
-				<h2>Descrição</h2>
+				<h2>{t("Description")}</h2>
 				<ProductDescription description={description} />
 			</section>
 		</section>

@@ -1,0 +1,91 @@
+@import "../../../styles/variables.module.scss";
+
+.preventScroll {
+	height: 100vh;
+	overflow: hidden;
+}
+
+.menu {
+	.overlay {
+		opacity: 0;
+		visibility: hidden;
+		background: rgba(0, 0, 0, 0.25);
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+		content: " ";
+		z-index: 5;
+	}
+
+	> button {
+		@include expandClickable;
+		position: relative;
+		z-index: 10;
+		svg {
+			transform: translate(0, -50%);
+			opacity: 1;
+			position: absolute;
+			&.close {
+				opacity: 0;
+				transform: translate(-300px, -50%);
+			}
+		}
+	}
+	nav {
+		background-color: $pallete5;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		overflow: hidden;
+		padding-top: 80px;
+		position: fixed;
+		top: 0px;
+		z-index: 9;
+
+		ul.links {
+			padding: $contentPadding;
+			position: relative;
+			z-index: 9;
+			font-size: 20px;
+			li {
+				padding: 15px 0;
+				a {
+					@include expandClickable;
+					align-items: center;
+					display: flex;
+					svg {
+						height: 23px;
+						width: 23px;
+					}
+					span {
+						padding-left: 10px;
+					}
+				}
+			}
+		}
+	}
+
+	&.opened {
+		> button {
+			svg {
+				&.close {
+					opacity: 1;
+					transform: translate(0, -50%);
+				}
+				&.open {
+					opacity: 0;
+					transform: translate(-300px, -50%);
+				}
+			}
+		}
+		nav {
+			width: 250px;
+		}
+		.overlay {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
