@@ -7,7 +7,7 @@ import { Cart, Megaphone, Star } from "@styled-icons/boxicons-solid";
 
 export const Navigation: React.FC = () => {
 	const { t } = useI18n();
-	const [opened, setOpened] = useState(true);
+	const [opened, setOpened] = useState(false);
 	const classNames = [styles.menu];
 	if (opened) {
 		classNames.push(styles.opened);
