@@ -1,9 +1,9 @@
 import { Menu, X } from "@styled-icons/boxicons-regular";
+import { Cart, Home, Megaphone, Star } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useI18n from "../../../hooks/i18n";
 import styles from "./Navigation.module.scss";
-import { Cart, Home, Megaphone, Star } from "@styled-icons/boxicons-solid";
 
 export const Navigation: React.FC = () => {
 	const { t } = useI18n();
@@ -25,6 +25,15 @@ export const Navigation: React.FC = () => {
 		}
 		setOpened(_opened);
 	};
+
+	useEffect(() => {
+		return () => {
+			console.log("called");
+			document
+				.getElementsByTagName("html")[0]
+				.classList.remove(styles.preventScroll);
+		};
+	}, []);
 
 	return (
 		<section className={classNames.join(" ")}>
