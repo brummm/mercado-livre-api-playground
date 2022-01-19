@@ -5,6 +5,7 @@ import { HeaderBackButton } from "../../components/Header";
 import { LoadingPage } from "../../components/Loading";
 import Page from "../../components/Page";
 import ProductDetails from "../../components/Products/ProductDetails";
+import useI18n from "../../hooks/i18n";
 import {
 	getCategory,
 	getDescription,
@@ -57,6 +58,7 @@ export const Product: React.FC<Props> = ({
 	description,
 }) => {
 	const router = useRouter();
+	const {t} = useI18n();
 	if (router.isFallback) {
 		return <LoadingPage />;
 	}
@@ -65,11 +67,11 @@ export const Product: React.FC<Props> = ({
 	if (category) {
 		back = {
 			title: category.name,
-			url: "/categoria/" + category.id,
+			url: "/category/" + category.id,
 		};
 	} else {
 		back = {
-			title: "Ver categorias",
+			title: t("See Categories"),
 			url: "/",
 		};
 	}

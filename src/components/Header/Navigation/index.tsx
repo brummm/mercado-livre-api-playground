@@ -36,21 +36,21 @@ export const Navigation: React.FC = () => {
 			<nav>
 				<ul className={styles.links}>
 					<li>
-						<Link href="cart">
+						<Link href="/cart">
 							<a>
 								<Cart /> <span>{t("Cart")}</span>
 							</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="favorites">
+						<Link href="/favorites">
 							<a>
 								<Star /> <span>{t("Favorites")}</span>
 							</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="credits">
+						<Link href="/credits">
 							<a>
 								<Megaphone /> <span>{t("Credits")}</span>
 							</a>

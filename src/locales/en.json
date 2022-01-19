@@ -6,11 +6,15 @@
 	"Credits": "Credits",
 
 	"Product Categories": "Product Categories",
+	"See Categories": "See Categories",
 
 	"Product info": "Product info",
+	"Image of Product {1}": "Image of Product {1}.",
 	"see all info": "see all info",
 	"Description": "Description",
 	"read more": "read more",
 	"less": "less",
-	"Add to cart": "Add to cart"
+	"Add to cart": "Add to cart",
+
+	"Shopping Cart": "Shopping Cart"
 }

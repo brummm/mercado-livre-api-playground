@@ -6,11 +6,15 @@
 	"Credits": "Créditos",
 
 	"Product Categories": "Categorias de Produtos",
+	"See Categories": "Ver categorias",
 
 	"Product info": "Informações do Produto",
+	"Image of Product {1}": "Imagem do produto {1}.",
 	"see all info": "ver todas as infomações",
 	"Description": "Descrição",
 	"read more": "ver mais",
 	"less": "menos",
-	"Add to cart": "Adicionar ao carrinho"
+	"Add to cart": "Adicionar ao carrinho",
+
+	"Shopping Cart": "Carrinho de Compras"
 }

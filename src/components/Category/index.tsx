@@ -150,7 +150,7 @@ export const Category: React.FC<CategoryProps> = ({
 					<ul ref={categoryListRef}>
 						{showingCategories.map(({ name, id }) => (
 							<li key={id}>
-								<Link href={`/categoria/${id}`}><a>{name}</a></Link>
+								<Link href={`/category/${id}`}><a>{name}</a></Link>
 							</li>
 						))}
 					</ul>

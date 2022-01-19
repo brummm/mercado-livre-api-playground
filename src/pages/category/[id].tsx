@@ -32,7 +32,7 @@ export const Category: React.FC<{ category: ICategory }> = ({ category }) => {
 	const { data, error } = useSWR(buildSearchUrl({ category: id }), fetcher);
 
 	const back: HeaderBackButton = {
-		title: "Ver categorias",
+		title: t("See Categories"),
 		url: "/",
 	};
 	return (
