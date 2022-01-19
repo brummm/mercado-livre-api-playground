@@ -3,8 +3,10 @@ import { IProduct } from "../lib/interfaces/IProduct";
 import { ShoppingCartStorage } from "../lib/ShoppingCartStorage";
 
 interface ShoppinCartContextProps {
-	totalItemsCarrinho: number;
+	totalCartItems: number;
+	totalPrice: number;
 	addProduct: (product: IProduct) => void;
+	removeProduct: (product: IProduct, all?: boolean) => void;
 }
 
 export const ShoppinCartContext = createContext<ShoppinCartContextProps>(
@@ -14,17 +16,31 @@ export const ShoppinCartContext = createContext<ShoppinCartContextProps>(
 export const useShoppingCart = () => useContext(ShoppinCartContext);
 
 export const ShoppinCartContextProvider: FC = ({ children }) => {
-	const [totalItemsCarrinho, setTotalItemsCarrinho] = useState(0);
+	const [totalCartItems, setTotalCartItems] = useState(0);
+	const [totalPrice, setTotalPrice] = useState(0);
+
+	const updateTotals = () => {
+		setTotalCartItems(ShoppingCartStorage.getTotal());
+		setTotalPrice(ShoppingCartStorage.getTotalPrice());
+	};
+
 	useEffect(() => {
-		setTotalItemsCarrinho(ShoppingCartStorage.getTotal());
+		updateTotals();
 	}, []);
 
 	const addProduct = (product: IProduct) => {
 		ShoppingCartStorage.addToCart(product);
-		setTotalItemsCarrinho(ShoppingCartStorage.getTotal());
+		updateTotals();
+	};
+
+	const removeProduct = (product: IProduct) => {
+		ShoppingCartStorage.removeFromCart(product);
+		updateTotals();
 	};
 	return (
-		<ShoppinCartContext.Provider value={{ totalItemsCarrinho, addProduct }}>
+		<ShoppinCartContext.Provider
+			value={{ totalCartItems, totalPrice, addProduct, removeProduct }}
+		>
 			{children}
 		</ShoppinCartContext.Provider>
 	);

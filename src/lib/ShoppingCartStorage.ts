@@ -18,15 +18,16 @@ export class ShoppingCartStorage {
 			? <ShoppingCartItem[]>JSON.parse(storage)
 			: [];
 
-			console.log(ShoppingCartStorage.items);
-
 		return ShoppingCartStorage.items;
 	}
 
-	private static saveItems(): void {
+	private static saveItems(items = null): void {
+		if (items === null) {
+			items = ShoppingCartStorage.loadItems();
+		}
 		localStorage.setItem(
 			ShoppingCartStorage.STORAGE_KEY,
-			JSON.stringify(ShoppingCartStorage.loadItems())
+			JSON.stringify(items)
 		);
 	}
 
@@ -37,6 +38,13 @@ export class ShoppingCartStorage {
 	static getTotal(): number {
 		return ShoppingCartStorage.loadItems().reduce(
 			(total, item) => total + item.total,
+			0
+		);
+	}
+
+	static getTotalPrice(): number {
+		return ShoppingCartStorage.loadItems().reduce(
+			(total, item) => total + item.product.price * item.total,
 			0
 		);
 	}
@@ -52,6 +60,23 @@ export class ShoppingCartStorage {
 				product,
 			});
 		}
-		ShoppingCartStorage.saveItems();
+		ShoppingCartStorage.saveItems(items);
+	}
+
+	static removeFromCart(product: IProduct, all = false) {
+		let items = ShoppingCartStorage.loadItems();
+		const productInCart = items.find((item) => item.product.id === product.id);
+		if (productInCart) {
+			productInCart.total--;
+			if (productInCart.total <= 0 || all) {
+				items = items.filter((item) => item.product.id !== product.id);
+			}
+		} else {
+			items.push({
+				total: 1,
+				product,
+			});
+		}
+		ShoppingCartStorage.saveItems(items);
 	}
 }

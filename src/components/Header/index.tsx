@@ -1,6 +1,7 @@
 import { ChevronLeft } from "@styled-icons/boxicons-regular";
 import { Cart } from "@styled-icons/boxicons-solid";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import useI18n from "../../hooks/i18n";
 import useShoppingCart from "../../hooks/shoppingCart";
@@ -24,11 +25,12 @@ export const Header: React.FC<HeaderProps> = ({
 	back,
 	titleType,
 }) => {
+	const { asPath } = useRouter();
 	const headerRef = useRef(null);
 	const spacerRef = useRef(null);
 	const { t } = useI18n();
 	const [classNames, setClassNames] = useState([styles.header]);
-	const { totalItemsCarrinho } = useShoppingCart();
+	const { totalCartItems } = useShoppingCart();
 	const { locales, locale } = useI18n();
 
 	const updateSpacer = () => {
@@ -55,7 +57,6 @@ export const Header: React.FC<HeaderProps> = ({
 		<>
 			<header ref={headerRef} className={classNames.join(" ")}>
 				<section className={styles.navigation}>
-
 					<Navigation />
 
 					<section className={styles.localesCart}>
@@ -65,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({
 									.filter((_locale) => _locale !== locale)
 									.map((locale) => (
 										<li key={locale}>
-											<Link href="./" locale={locale}>
+											<Link href={asPath} locale={locale}>
 												<a>{locale}</a>
 											</Link>
 										</li>
@@ -75,9 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
 
 						<Link href="cart">
 							<a className={styles.cart}>
-								<p aria-label={t("Total items in cart.")}>
-									{totalItemsCarrinho}
-								</p>
+								<p aria-label={t("Total items in cart.")}>{totalCartItems}</p>
 								<Cart aria-label="Carrinho" />
 							</a>
 						</Link>

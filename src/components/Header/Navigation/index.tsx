@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import useI18n from "../../../hooks/i18n";
 import styles from "./Navigation.module.scss";
-import { Cart, Megaphone, Star } from "@styled-icons/boxicons-solid";
+import { Cart, Home, Megaphone, Star } from "@styled-icons/boxicons-solid";
 
 export const Navigation: React.FC = () => {
 	const { t } = useI18n();
@@ -35,6 +35,13 @@ export const Navigation: React.FC = () => {
 			</button>
 			<nav>
 				<ul className={styles.links}>
+					<li>
+						<Link href="/">
+							<a>
+								<Home /> <span>{t("Home")}</span>
+							</a>
+						</Link>
+					</li>
 					<li>
 						<Link href="/cart">
 							<a>
