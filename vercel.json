@@ -3,6 +3,9 @@
     "public": false,
     "github": {
       "enabled": false
-    }
+    },
+    "builds": [
+        { "src": "./.next", "use": "@vercel/static" }
+    ]
   }
   
