@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
 							</ul>
 						</nav>
 
-						<Link href="cart">
+						<Link href="/cart">
 							<a className={styles.cart}>
 								<p aria-label={t("Total items in cart.")}>{totalCartItems}</p>
 								<Cart aria-label="Carrinho" />
